@@ -1,0 +1,13 @@
+main.js中的axios默认路径，defaults.baseURL
+路由导航守卫不打算做
+
+BlogControl.vue
+    queryinfo中的query变量仍需要根据后端接口更改
+
+
+    
+npm install vue-quill-editor --save
+
+<p>a a a </p><p>这个十强啊</p>
+
+文章类别目前是写死的，没有新增文章分类功能
