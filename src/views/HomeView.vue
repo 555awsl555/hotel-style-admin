@@ -26,7 +26,7 @@
                 <span>成果管理</span>
               </template>
               <!-- 二级菜单 -->
-              <el-menu-item index="/tab/control" @click="saveNavState('/tab/control')">
+              <el-menu-item index="/source/control" @click="saveNavState('/source/control')">
                   <!-- 图标 -->
                   <i class="el-icon-setting"></i>
                   <!-- 文本 -->
@@ -48,13 +48,13 @@
                   <i class="el-icon-tickets"></i>
                   <span>活动列表</span>
               </el-menu-item> -->
-              <el-menu-item index="/blog/blogadd" @click="saveNavState('/blog/blogadd')">
+              <el-menu-item index="/event/eventadd" @click="saveNavState('/event/eventadd')">
                   <!-- 图标 -->
                   <i class="el-icon-plus"></i>
                   <!-- 文本 -->
                   <span>活动添加</span>
               </el-menu-item>
-              <el-menu-item index="/blog/blogcontrol" @click="saveNavState('/blog/blogcontrol')">
+              <el-menu-item index="/event/eventcontrol" @click="saveNavState('/event/eventcontrol')">
                   <!-- 图标 -->
                   <i class="el-icon-setting"></i>
                   <!-- 文本 -->

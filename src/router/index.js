@@ -4,12 +4,10 @@ import HomeView from '../views/HomeView.vue'
 import Login from '../views/Login.vue'
 import Welcome from '../views/Home/Welcome.vue'
 import UserInformation from '../views/Home/user/UserInformation.vue'
-import BlogList from '../views/Home/blog/BlogList.vue'
-import BlogAdd from '../views/Home/blog/BlogAdd.vue'
-import Detail from '../views/Home/blog/Detail.vue'
-import BlogControl from '../views/Home/blog/BlogControl.vue'
+import EventAdd from '../views/Home/blog/EventAdd.vue'
+import EventControl from '../views/Home/blog/EventControl.vue'
 
-import TabControlVue from '../views/Home/tab/TabControl.vue'
+import SourceControlVue from '../views/Home/tab/SourceControl.vue'
 
 Vue.use(VueRouter)
 
@@ -32,9 +30,9 @@ const routes = [
         component: Welcome
       },
       {
-        path: '/tab/control',
-        name: 'tabcontrol',
-        component: TabControlVue
+        path: '/source/control',
+        name: 'sourcecontrol',
+        component: SourceControlVue
       },
       {
         path: '/user/information',
@@ -42,24 +40,15 @@ const routes = [
         component: UserInformation
       },
       {
-        path: '/blog/bloglist',
-        name: 'bloglist',
-        component: BlogList
+        path: '/event/eventadd',
+        name: 'eventadd',
+        component: EventAdd
       },
       {
-        path: '/blog/blogadd',
-        name: 'blogadd',
-        component: BlogAdd
+        path: '/event/eventcontrol',
+        name: 'eventcontrol',
+        component: EventControl
       },
-      {
-        path: '/blog/blogcontrol',
-        name: 'blogcontrol',
-        component: BlogControl
-      },
-      {
-        path: '/blog/detail/:id',
-        component: Detail
-      }
     ]
   },
   {
