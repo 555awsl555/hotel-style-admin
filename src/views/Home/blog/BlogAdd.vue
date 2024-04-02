@@ -157,7 +157,7 @@ export default{
             {
                 this.$message({
                     type: 'warning',
-                    message: '不能跳跃步骤，请闲填写博客设置'
+                    message: '不能跳跃步骤，请先填写活动设置'
                 });
                 return false
             }
@@ -195,17 +195,17 @@ export default{
             }
             if (activeName == '2')
             {
-                this.addForm.eventTime = this.otherForm.createTime1 +'  ' + this.otherForm.createTime2
-                this.addForm.eventEndTime = this.otherForm.endTime1 +'  ' + this.otherForm.endTime2
+                this.addForm.eventTime = this.otherForm.createTime1 +'T' + this.otherForm.createTime2
+                this.addForm.eventEndTime = this.otherForm.endTime1 +'T' + this.otherForm.endTime2
             }
         },
-        showBlogInfo(){
-            console.log(this.addForm)
-            this.infoDialogVisible = true
-        },
+        // showBlogInfo(){
+        //     console.log(this.addForm)
+        //     this.infoDialogVisible = true
+        // },
         async add(){
-            console.log("BlogAdd.vue中上传的表单数据为：",this.addForm)
-            const{data:res} = await axios.post('/content/article',this.addForm,{
+            console.log("EventAdd.vue中上传的表单数据为：",this.addForm)
+            const{data:res} = await axios.post('/Event/add',this.addForm,{
                 headers:{
                     token:this.token
                 }
@@ -213,10 +213,10 @@ export default{
             console.log("add方法提交返回的结果为：",res)
             if(res.code != 200)
             {
-                return this.$message.error('添加博客失败')
+                return this.$message.error('添加活动失败')
             }
-            this.$message.success('添加博客成功')
-            this.$router.push('/blog/blogcontrol')
+            this.$message.success('添加活动成功')
+            // this.$router.push('/blog/blogcontrol')
         },
         // async getNessaryMessage(){
 

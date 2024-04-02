@@ -3,14 +3,14 @@
         <!-- 面包屑导航区 -->
         <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>博客系统</el-breadcrumb-item>
-            <el-breadcrumb-item>博客管理</el-breadcrumb-item>
+            <el-breadcrumb-item>活动系统</el-breadcrumb-item>
+            <el-breadcrumb-item>活动列表</el-breadcrumb-item>
         </el-breadcrumb>
         <!-- 搜索区域 -->
         <el-card>
             <el-row :gutter="20">
                 <el-col :span="12">
-                    <el-input placeholder="请输入搜索的文章标题" v-model="queryinfo.title" class="input-with-select" clearable @clear="getUserList()">
+                    <el-input placeholder="请输入搜索的活动标题" v-model="queryinfo.title" class="input-with-select" clearable @clear="getUserList()">
                         <el-button slot="append" icon="el-icon-search" @click="getUserList()"></el-button>
                     </el-input>
                 </el-col>
