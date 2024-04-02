@@ -267,7 +267,6 @@ export default {
             console.log(this.uploadPictureId)
             this.pictureDialog = true;
         },
-        //展示编辑博客信息的对话框
         async showEventDialog(id){
             const {data:res} = await axios.get(`Event/${id}`,
             {
@@ -286,7 +285,6 @@ export default {
             this.editForm = res.data
             this.editDialogVisible = true
         },
-        //提交文章修改
         async editBlogInfo(){
             const jsonData = JSON.stringify(this.editForm);
             const {data:res} = await axios.put(`/Event/edit`,jsonData,{

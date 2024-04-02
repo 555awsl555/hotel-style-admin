@@ -62,9 +62,11 @@
         width="30%">
             <el-upload
                 class="upload-demo"
+                ref="uploadFile"
                 :action="`http://localhost:8989/Source/upload/${this.uploadSourceId}`"
                 :on-preview="handlePreview"
                 :on-remove="handleRemove"
+               
                 accept=".zip, .rar"
                 :file-list="fileList"
                 :limit="1"
@@ -136,6 +138,7 @@ export default {
             this.uploadSourceId = row.id
             this.sourceDialog = true
             console.log(row.id)
+            console.log(this.$refs)
         },
              //提交页数的变化
         // handleSizeChange(newSize) {
@@ -151,7 +154,9 @@ export default {
             this.sourceDialog = false
         },
         uploadTure(){
+            // this.$refs.uploadFile.submit();
             this.sourceDialog = false
+            this.fileList = []
         },
         handleRemove(file, fileList) {
             console.log(file, fileList);
