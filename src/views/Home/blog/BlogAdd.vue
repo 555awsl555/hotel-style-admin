@@ -59,7 +59,7 @@
                     </el-tab-pane>
 
                     <el-tab-pane label="上传确认" name="2">
-                        <el-button type="info" round @click="showBlogInfo()">文章缩略图</el-button>
+                        <!-- <el-button type="info" round @click="showBlogInfo()">文章缩略图</el-button> -->
                         <el-button type="primary" round :disabled="!otherForm.switchValue" @click="add()">确认上传<i class="el-icon-upload el-icon--right"></i></el-button>
                         <el-form-item label="确认信息无误" style="margin-top: 30px;">
                             <el-switch v-model="otherForm.switchValue"></el-switch>

@@ -42,7 +42,7 @@ export default {
         console.log('提交的用户账号：'+this.loginForm.userName);
         console.log('提交的用户密码：'+this.loginForm.password);
 
-        axios.post('/user/login',this.loginForm).then((resp) =>{
+        axios.post('/admin/login',this.loginForm).then((resp) =>{
             console.log("登录获得的请求为",resp);
             let data = resp.data;
             
