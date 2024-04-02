@@ -96,10 +96,17 @@
                     <el-input v-model="editForm.id" disabled></el-input>
                 </el-form-item>
                 <el-form-item label="标题">
-                    <el-input v-model="editForm.title"></el-input>
+                    <el-input v-model="editForm.eventName"></el-input>
                 </el-form-item>
+                <el-form-item label="举行类别" prop="eventLocation">
+                            <el-select v-model="editForm.eventLocation" placeholder="请选择活动举行类别">
+                                <div v-for="(item,i) in localtionList" :key="i">
+                                    <el-option :label="item.name" :value="item.name"></el-option>
+                                </div>
+                            </el-select>
+                        </el-form-item>
                 <el-form-item label="内容">
-                    <quill-editor v-model="editForm.content"></quill-editor>
+                    <quill-editor v-model="editForm.eventContent"></quill-editor>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
@@ -112,9 +119,20 @@
         title="提示"
         :visible.sync="pictureDialog"
         width="30%">
-            <span>这是一段信息</span>
+            <el-upload
+                class="upload-demo"
+                :action="`http://localhost:8989/Event/upload/${this.uploadPictureId}`"
+                :on-preview="handlePreview"
+                :on-remove="handleRemove"
+                :file-list="fileList"
+                :headers="headers"
+                name="img"
+                list-type="picture">
+                <el-button size="small" type="primary">点击上传</el-button>
+                <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb，上传后将覆盖原图</div>
+            </el-upload>
             <span slot="footer" class="dialog-footer">
-                <el-button @click="pictureDialog = false">取 消</el-button>
+                <el-button @click="showFileList()">取 消</el-button>
                 <el-button type="primary" @click="pictureDialog = false">确 定</el-button>
             </span>
         </el-dialog>
@@ -134,6 +152,10 @@ export default {
                 //当前每页显示多少数据
                 pageSize:sessionStorage.getItem('BlogListpageSize')?parseInt(sessionStorage.getItem('BlogListpageSize')):5
             },
+            localtionList:[
+                {"name":"线上"},
+                {"name":"线下"}
+            ],
             eventlist:[
                 {
                 "eventId": 1,
@@ -181,9 +203,14 @@ export default {
             total:4,
             editDialogVisible: false,
             pictureDialog: false,
+            uploadPictureId:'',
+            headers:{
+                token:sessionStorage.getItem('token')
+            },
+            fileList: [],
             //查询用户时候的空对象
             editForm: {
-                "eventId": 1,
+                "id": null,
                 "eventName": "格致论道@西湖论剑",
                 "eventTime": "2023-05-05T10:30:00.000+00:00",
                 "eventLocation": "线上",
@@ -192,9 +219,9 @@ export default {
                 "videoreplayLink": "",
                 "subscribersCount": 45,
                 "eventPopularity": 111,
-                "type": "格致论道",
-                "eventEndTime": "2023-05-05T13:45:00.000+00:00",
-                "pictureUrl": null
+                "pictureUrl": null,
+                "type": 1,
+                "eventEndTime": "2023-05-05T13:45:00.000+00:00"
             }
         }
     },
@@ -235,22 +262,24 @@ export default {
             window.sessionStorage.setItem('BlogListpageNum',newPage)
             this.getEventList()
         },
-        changeEventPicture(){
+        changeEventPicture(id){
+            this.uploadPictureId = id;
+            console.log(this.uploadPictureId)
             this.pictureDialog = true;
         },
         //展示编辑博客信息的对话框
         async showEventDialog(id){
-            const {data:res} = await axios.get(`content/article/${id}`,
+            const {data:res} = await axios.get(`Event/${id}`,
             {
                 headers:{
                     token:this.token
                 }
             })
-            console.log("BlogControl.vue中被修改文章的数据为：",res)
+            console.log("showEventDialog中被修改文章的数据为：",res)
             if(res.code!==200)
             {
                 return this.$message({
-                    message: '获取用户列表失败',
+                    message: '获取活动数据失败',
                     type: 'error'
                 })
             }
@@ -344,12 +373,21 @@ export default {
             hour12: false
             });
         },
+        handleRemove(file, fileList) {
+            console.log(file, fileList);
+        },
+        handlePreview(file) {
+            console.log(file);
+        },
+        showFileList(){
+            console.log(this.img)
+        }
     },
     computed:{
         reversedArticles() {
       // 使用 reverse() 方法反转数组,使得添加文章后，所实现的文章列表展示更加符合人性化
     //   return this.eventlist.slice().reverse();
-    }
+        },
     }
 
 }
