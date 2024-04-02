@@ -44,12 +44,10 @@
                 <span>活动管理</span>
               </template>
               <!-- 二级菜单 -->
-              <el-menu-item index="/blog/bloglist" @click="saveNavState('/blog/bloglist')">
-                  <!-- 图标 -->
+              <!-- <el-menu-item index="/blog/bloglist" @click="saveNavState('/blog/bloglist')">
                   <i class="el-icon-tickets"></i>
-                  <!-- 文本 -->
                   <span>活动列表</span>
-              </el-menu-item>
+              </el-menu-item> -->
               <el-menu-item index="/blog/blogadd" @click="saveNavState('/blog/blogadd')">
                   <!-- 图标 -->
                   <i class="el-icon-plus"></i>
