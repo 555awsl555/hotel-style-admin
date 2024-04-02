@@ -4,7 +4,7 @@
       <!--头部区域-->
       <el-header>
         <span></span>
-        <span>个人博客系统</span>
+        <span>后台管理系统</span>
         <el-button type="info" @click="Logout()">退出</el-button>
       </el-header>
       <!--内容区域-->
