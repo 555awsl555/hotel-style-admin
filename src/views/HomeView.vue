@@ -23,14 +23,14 @@
                 <!-- 图标 -->
                 <i class="el-icon-menu"></i>
                 <!-- 文本 -->
-                <span>标签系统</span>
+                <span>成果管理</span>
               </template>
               <!-- 二级菜单 -->
               <el-menu-item index="/tab/control" @click="saveNavState('/tab/control')">
                   <!-- 图标 -->
                   <i class="el-icon-setting"></i>
                   <!-- 文本 -->
-                  <span>标签管理</span>
+                  <span>下载链接上传</span>
               </el-menu-item>
             </el-submenu>
 
@@ -41,26 +41,26 @@
                 <!-- 图标 -->
                 <i class="el-icon-menu"></i>
                 <!-- 文本 -->
-                <span>博客系统</span>
+                <span>活动管理</span>
               </template>
               <!-- 二级菜单 -->
               <el-menu-item index="/blog/bloglist" @click="saveNavState('/blog/bloglist')">
                   <!-- 图标 -->
                   <i class="el-icon-tickets"></i>
                   <!-- 文本 -->
-                  <span>文章列表</span>
+                  <span>活动列表</span>
               </el-menu-item>
               <el-menu-item index="/blog/blogadd" @click="saveNavState('/blog/blogadd')">
                   <!-- 图标 -->
                   <i class="el-icon-plus"></i>
                   <!-- 文本 -->
-                  <span>博客添加</span>
+                  <span>活动添加</span>
               </el-menu-item>
               <el-menu-item index="/blog/blogcontrol" @click="saveNavState('/blog/blogcontrol')">
                   <!-- 图标 -->
                   <i class="el-icon-setting"></i>
                   <!-- 文本 -->
-                  <span>博客管理</span>
+                  <span>活动列表</span>
               </el-menu-item>
 
             </el-submenu>
