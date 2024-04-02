@@ -8,13 +8,13 @@
         </el-breadcrumb>
         <!-- 搜索区域 -->
         <el-card>
-            <el-row :gutter="20">
+            <!-- <el-row :gutter="20">
                 <el-col :span="12">
                     <el-input placeholder="请输入搜索的活动标题" v-model="queryinfo.title" class="input-with-select" clearable @clear="getEventList()">
                         <el-button slot="append" icon="el-icon-search" @click="getEventList()"></el-button>
                     </el-input>
                 </el-col>
-            </el-row>
+            </el-row> -->
 
             <!-- 文章信息列表区域 -->
             <el-table :data="eventlist" stripe :fit="true">
@@ -48,7 +48,7 @@
                         </el-form>
                     </template>
                 </el-table-column>
-                <el-table-column prop="eventId" label="活动编号" :width="100" align="center"></el-table-column>
+                <el-table-column prop="id" label="活动编号" :width="100" align="center"></el-table-column>
                 <el-table-column prop="eventName" label="活动标题"></el-table-column>
                 <el-table-column prop="eventTime" label="开始时间" :formatter="formatDateTime"></el-table-column>
                 <el-table-column prop="pictureUrl" label="活动图片">
@@ -133,7 +133,7 @@
             </el-upload>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="showFileList()">取 消</el-button>
-                <el-button type="primary" @click="pictureDialog = false">确 定</el-button>
+                <el-button type="primary" @click="uploadTure()">确 定</el-button>
             </span>
         </el-dialog>
     </div>
@@ -289,13 +289,13 @@ export default {
         //提交文章修改
         async editBlogInfo(){
             const jsonData = JSON.stringify(this.editForm);
-            const {data:res} = await axios.put(`/content/article`,jsonData,{
+            const {data:res} = await axios.put(`/Event/edit`,jsonData,{
                headers:{
                    token:this.token,
                     'Content-Type':'application/json'
                }
             })
-            console.log("BlogControl.vue中提交文章修改获得的数据为：",res)
+            console.log("editBlogInfo中提交文章修改获得的数据为：",res)
             
             if(res.code!==200)
             {
@@ -308,7 +308,7 @@ export default {
             //关闭对话框
             this.editDialogVisible = false
             //刷新数据列表
-            // this.getEventList()
+            this.getEventList()
             //提示修改成功
             this.$message.success('修改成功')
         },
@@ -381,6 +381,11 @@ export default {
         },
         showFileList(){
             console.log(this.img)
+        },
+        uploadTure(){
+            this.getEventList();
+            this.pictureDialog = false
+            this.fileList =[]
         }
     },
     computed:{
