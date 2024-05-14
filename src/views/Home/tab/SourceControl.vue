@@ -157,6 +157,10 @@ export default {
             // this.$refs.uploadFile.submit();
             this.sourceDialog = false
             this.fileList = []
+            this.$message({
+                message: '上传成功',
+                type: 'success'
+            })
         },
         handleRemove(file, fileList) {
             console.log(file, fileList);

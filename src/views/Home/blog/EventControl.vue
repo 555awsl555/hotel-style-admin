@@ -87,7 +87,7 @@
 
         <!-- 修改信息对话框 -->
         <el-dialog
-        title="修改博客信息"
+        title="修改活动信息"
         :visible.sync="editDialogVisible"
         width="50%">
             <!-- 表单主题 -->
@@ -380,8 +380,8 @@ export default {
         showFileList(){
             console.log(this.img)
         },
-        uploadTure(){
-            this.getEventList();
+        async uploadTure(){
+            await this.getEventList();
             this.pictureDialog = false
             this.fileList =[]
         }

@@ -2,8 +2,8 @@
     <body id="poster">
         <el-form  class="login-cotainer" label-position="left" label-width="0px">
             <h3 class="login-title">
-                后台系统登录
-                <!-- <el-button  @click="toRegister()">点击注册</el-button> -->
+                酒店管理系统
+                <el-button  @click="toRegister()">点击注册</el-button>
             </h3>
             <el-form-item label="">
                 <el-input type="text" v-model="loginForm.userName" autocomplete="off" placeholder="账号"></el-input>
