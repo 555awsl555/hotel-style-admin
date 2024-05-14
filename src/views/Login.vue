@@ -6,7 +6,7 @@
                 <el-button  @click="toRegister()">点击注册</el-button>
             </h3>
             <el-form-item label="">
-                <el-input type="text" v-model="loginForm.userName" autocomplete="off" placeholder="账号"></el-input>
+                <el-input type="text" v-model="loginForm.loginName" autocomplete="off" placeholder="账号"></el-input>
             </el-form-item>
    
             <el-form-item label="">
@@ -32,30 +32,27 @@ export default {
   data() {
       return {
         loginForm: {
-            userName: '',
+            loginName: '',
             password:''
         }
       }
     },
     methods: {
       toLogin() {
-        console.log('提交的用户账号：'+this.loginForm.userName);
+        console.log('提交的用户账号：'+this.loginForm.loginName);
         console.log('提交的用户密码：'+this.loginForm.password);
 
-        axios.post('/admin/login',this.loginForm).then((resp) =>{
+        axios.get(`/login?loginName=${this.loginForm.loginName}&password=${this.loginForm.password}`).then((resp) =>{
             console.log("登录获得的请求为",resp);
             let data = resp.data;
             
-            if(data.code == 200)
+            if(data.status == 200)
             {
                 this.loginForm={};
                 this.$message({
                     message: '恭喜你，登录成功',
                     type: 'success'
                 });
-                //存数据
-                window.sessionStorage.setItem("token",data.data.token)
-                window.sessionStorage.setItem("userInfo",data.data.userInfo)
                 this.$router.push('/home')
             }else
             {

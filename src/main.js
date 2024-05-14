@@ -4,7 +4,8 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 Vue.prototype.$http = axios
-axios.defaults.baseURL = 'http://localhost:8989'
+axios.defaults.baseURL = 'http://192.168.10.59:8012'
+
 
 //富文本编辑器挂载
 import VueQuillEditor from 'vue-quill-editor'

@@ -9,6 +9,9 @@ import EventControl from '../views/Home/blog/EventControl.vue'
 
 import SourceControlVue from '../views/Home/tab/SourceControl.vue'
 
+//项目开始写的
+import Register from '../views/Register.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -17,6 +20,11 @@ const routes = [
     path: '/',
     name: 'login',
     component: Login
+  },
+  {
+    path:'/register',
+    name:'register',
+    component:Register
   },
   {
     path: '/home',
