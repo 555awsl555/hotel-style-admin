@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h3>welcome</h3>
+        <h1>vuex数据测试页面</h1>
+        <h3>sboosId:{{$store.state.sbossId}}</h3>
+        <h3>jobName:{{$store.state.jobName}}</h3>
     </div>
     
 </template>
