@@ -7,7 +7,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     sbossId:"",
-    jobName:""
+    jobName:"",
+    //该用户的id
+    Sid:""
   },
   getters: {
   },
@@ -19,6 +21,10 @@ export default new Vuex.Store({
     SET_JOBNAME(state,jobName){
       state.jobName = jobName;
       console.log("vuex中设置 jobName 为 ",state.jobName)
+    },
+    SET_SID(state,Sid){
+      state.Sid = Sid;
+      console.log("vuex中设置 Sid 为 ",state.Sid)
     }
   },
   actions: {
@@ -27,6 +33,6 @@ export default new Vuex.Store({
   },
   plugins: [createPersistedState({
     storage:window.sessionStorage,
-    paths:['sbossId','jobName']
+    paths:['sbossId','jobName','Sid']
 })]
 })

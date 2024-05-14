@@ -56,6 +56,7 @@ export default {
                 this.$router.push('/home')
                 this.$store.commit("SET_SBOSSID",data.staff.sbossId)
                 this.$store.commit("SET_JOBNAME",data.staff.jobName)
+                this.$store.commit("SET_SID",data.staff.sid)
             }else
             {
                 this.$message({

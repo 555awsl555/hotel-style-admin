@@ -11,6 +11,7 @@ import SourceControlVue from '../views/Home/tab/SourceControl.vue'
 
 //项目开始写的
 import Register from '../views/Register.vue'
+import StaffApprove from '../views/Home/approve/StaffApprove.vue'
 
 Vue.use(VueRouter)
 
@@ -57,6 +58,11 @@ const routes = [
         name: 'eventcontrol',
         component: EventControl
       },
+      {
+        path:'/staffApprove',
+        name: 'staffapprove',
+        component: StaffApprove
+      }
     ]
   },
   {

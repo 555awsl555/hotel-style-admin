@@ -33,8 +33,7 @@
                   <span>下载链接上传</span>
               </el-menu-item>
             </el-submenu>
-
-            
+      
             <el-submenu index="2">
               <!-- 一级菜单模板区 -->
               <template slot="title">
@@ -61,6 +60,23 @@
                   <span>活动列表</span>
               </el-menu-item>
 
+            </el-submenu>
+
+            <el-submenu index="3" v-if="$store.state.jobName === '超级管理员' || $store.state.jobName === '管理员'">
+              <!-- 一级菜单模板区 -->
+              <template slot="title">
+                <!-- 图标 -->
+                <i class="el-icon-menu"></i>
+                <!-- 文本 -->
+                <span>审计管理</span>
+              </template>
+              <!-- 二级菜单 -->
+              <el-menu-item index="/staffApprove" @click="saveNavState('/staffApprove')">
+                  <!-- 图标 -->
+                  <i class="el-icon-setting"></i>
+                  <!-- 文本 -->
+                  <span>账号注册审计</span>
+              </el-menu-item>
             </el-submenu>
         </el-menu>
 
