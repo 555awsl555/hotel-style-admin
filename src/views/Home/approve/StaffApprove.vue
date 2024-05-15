@@ -3,7 +3,7 @@
         <!-- 面包屑导航区 -->
         <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>审计管理</el-breadcrumb-item>
+            <el-breadcrumb-item>账号管理</el-breadcrumb-item>
             <el-breadcrumb-item>账号注册审计</el-breadcrumb-item>
         </el-breadcrumb>
 

@@ -32,7 +32,7 @@
           
           <el-form-item label="" prop="Ssex">
             <el-select v-model="ruleForm.Ssex" placeholder="请选择性别">
-                <el-option label="女" value="0"></el-option>
+                <el-option label="女" value="2"></el-option>
                 <el-option label="男" value="1"></el-option>
             </el-select>
           </el-form-item>
@@ -42,9 +42,9 @@
             <el-select v-model="ruleForm.bossSid" placeholder="请选择上级ID">
                 <el-option
                 v-for="item in bossIdList"
-                :key="item.Sid"
-                :label="item.Sname"
-                :value="item.Sid">
+                :key="item.sid"
+                :label="item.sname"
+                :value="item.sid">
                 </el-option>
             </el-select>
           </el-form-item>
@@ -108,8 +108,12 @@ export default {
         },
         bossIdList:[
             {
-                Sid: 1,
-                Sname: ""
+                sid: 1,
+                sname: ""
+            },
+            {
+                sid: 2,
+                sname: "123"
             }
         ],
         rules: {
@@ -181,7 +185,7 @@ export default {
       async getBossIdList(){
         const {data:res} = await axios.get('/login/getAdminStaff')
         console.log("getbossidlist的请求为：",res)
-        if (res.status == 1){
+        if (res.status == 200){
             this.bossIdList = res.adminStaff
         }
         console.log("获取的idlist为：",this.bossIdList)

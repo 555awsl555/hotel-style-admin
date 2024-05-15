@@ -68,7 +68,7 @@
                 <!-- 图标 -->
                 <i class="el-icon-menu"></i>
                 <!-- 文本 -->
-                <span>审计管理</span>
+                <span>账号管理</span>
               </template>
               <!-- 二级菜单 -->
               <el-menu-item index="/staffApprove" @click="saveNavState('/staffApprove')">
@@ -77,7 +77,16 @@
                   <!-- 文本 -->
                   <span>账号注册审计</span>
               </el-menu-item>
+              <!-- 二级菜单 -->
+              <el-menu-item index="/user/information" @click="saveNavState('/user/information')">
+                  <!-- 图标 -->
+                  <i class="el-icon-setting"></i>
+                  <!-- 文本 -->
+                  <span>账号信息查看</span>
+              </el-menu-item>
             </el-submenu>
+
+            
         </el-menu>
 
         </el-aside>
