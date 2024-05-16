@@ -34,30 +34,26 @@
               </el-menu-item>
             </el-submenu>
       
-            <el-submenu index="2">
+            <el-submenu index="2" v-if="$store.state.jobName === '超级管理员' || $store.state.jobName === '管理员'">
               <!-- 一级菜单模板区 -->
               <template slot="title">
                 <!-- 图标 -->
                 <i class="el-icon-menu"></i>
                 <!-- 文本 -->
-                <span>活动管理</span>
+                <span>客房管理</span>
               </template>
               <!-- 二级菜单 -->
-              <!-- <el-menu-item index="/blog/bloglist" @click="saveNavState('/blog/bloglist')">
-                  <i class="el-icon-tickets"></i>
-                  <span>活动列表</span>
-              </el-menu-item> -->
-              <el-menu-item index="/event/eventadd" @click="saveNavState('/event/eventadd')">
+              <el-menu-item index="/roomType" @click="saveNavState('/roomType')">
                   <!-- 图标 -->
-                  <i class="el-icon-plus"></i>
+                  <i class="el-icon-setting"></i>
                   <!-- 文本 -->
-                  <span>活动添加</span>
+                  <span>客房类型设置</span>
               </el-menu-item>
               <el-menu-item index="/event/eventcontrol" @click="saveNavState('/event/eventcontrol')">
                   <!-- 图标 -->
                   <i class="el-icon-setting"></i>
                   <!-- 文本 -->
-                  <span>活动列表</span>
+                  <span>客房信息设置</span>
               </el-menu-item>
 
             </el-submenu>

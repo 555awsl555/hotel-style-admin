@@ -13,6 +13,7 @@ import SourceControlVue from '../views/Home/tab/SourceControl.vue'
 import Register from '../views/Register.vue'
 import StaffApprove from '../views/Home/approve/StaffApprove.vue'
 import OperatingRecord from '../views/Home/operating/OperatingRecord.vue'
+import RoomType from '../views/Home/room/RoomType.vue'
 
 Vue.use(VueRouter)
 
@@ -69,6 +70,11 @@ const routes = [
         name:'operatingRecord',
         component: OperatingRecord
       },
+      {
+        path:'/roomType',
+        name:'roomType',
+        component:RoomType
+      }
     ]
   },
   {
