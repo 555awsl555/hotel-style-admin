@@ -10,7 +10,7 @@
         <el-card>
             <el-row :gutter="20">
                 
-                <el-col :span="4">
+                <el-col :span="6">
                     <el-input placeholder="请输入操作人ID" v-model="queryinfo.operatorId" class="input-with-select" clearable @clear="getOperatingRecord()">
                         <el-button slot="append" icon="el-icon-search" @click="getOperatingRecord()"></el-button>
                     </el-input>

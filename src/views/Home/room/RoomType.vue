@@ -29,12 +29,21 @@
                     </template>
                 </el-table-column>
 
-                <el-table-column label="修改信息">
+                <el-table-column label="修改信息" width="80">
                     <template slot-scope="scope">
                         <el-button
                         size="mini"
                         type="primary"
                         @click="modifyRoomTypeInformation(scope.row.rtid)">更改</el-button>
+                    </template>
+                </el-table-column>
+
+                <el-table-column label="删除类型">
+                    <template slot-scope="scope">
+                        <el-button
+                        size="mini"
+                        type="danger"
+                        @click="deleteRoomType(scope.row.rtid)">删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -171,7 +180,32 @@ export default{
                 });
                 this.addVisible = false;
                 this.getAllRoomType()
+            }else{
+                this.$message({
+                    message: res.message,
+                    type: 'error'
+                });
             }
+        },
+        async deleteRoomType(rtid){
+            console.log(rtid)
+            const {data:res} = await axios.post(`/roomtype/deleteRoomType?operatorid=${this.$store.state.Sid}&RTid=${rtid}`)
+            console.log("删除的结果为:",res)
+            if(res.status == 200)
+            {
+                this.$message({
+                    message: '删除成功',
+                    type: 'success'
+                });
+                this.addVisible = false;
+                this.getAllRoomType()
+            }else{
+                this.$message({
+                    message: res.message,
+                    type: 'error'
+                });
+            }
+            this.getAllRoomType()
         }
     },
     created(){
