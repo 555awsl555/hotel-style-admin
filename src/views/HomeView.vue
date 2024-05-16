@@ -75,7 +75,7 @@
                   <!-- 图标 -->
                   <i class="el-icon-setting"></i>
                   <!-- 文本 -->
-                  <span>账号注册审计</span>
+                  <span>账号注册审核</span>
               </el-menu-item>
               <!-- 二级菜单 -->
               <el-menu-item index="/user/information" @click="saveNavState('/user/information')">
@@ -86,7 +86,22 @@
               </el-menu-item>
             </el-submenu>
 
-            
+            <el-submenu index="4" v-if="$store.state.jobName === '超级管理员' || $store.state.jobName === '管理员'">
+              <!-- 一级菜单模板区 -->
+              <template slot="title">
+                <!-- 图标 -->
+                <i class="el-icon-menu"></i>
+                <!-- 文本 -->
+                <span>操作审计</span>
+              </template>
+              <!-- 二级菜单 -->
+              <el-menu-item index="/operatingRecord" @click="saveNavState('/operatingRecord')">
+                  <!-- 图标 -->
+                  <i class="el-icon-setting"></i>
+                  <!-- 文本 -->
+                  <span>操作记录</span>
+              </el-menu-item>
+            </el-submenu>
         </el-menu>
 
         </el-aside>

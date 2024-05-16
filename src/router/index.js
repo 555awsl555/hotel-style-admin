@@ -12,6 +12,7 @@ import SourceControlVue from '../views/Home/tab/SourceControl.vue'
 //项目开始写的
 import Register from '../views/Register.vue'
 import StaffApprove from '../views/Home/approve/StaffApprove.vue'
+import OperatingRecord from '../views/Home/operating/OperatingRecord.vue'
 
 Vue.use(VueRouter)
 
@@ -62,7 +63,12 @@ const routes = [
         path:'/staffApprove',
         name: 'staffapprove',
         component: StaffApprove
-      }
+      },
+      {
+        path:'/operatingRecord',
+        name:'operatingRecord',
+        component: OperatingRecord
+      },
     ]
   },
   {
