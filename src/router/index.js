@@ -14,6 +14,7 @@ import Register from '../views/Register.vue'
 import StaffApprove from '../views/Home/approve/StaffApprove.vue'
 import OperatingRecord from '../views/Home/operating/OperatingRecord.vue'
 import RoomType from '../views/Home/room/RoomType.vue'
+import RoomInformation from '../views/Home/room/RoomInformation.vue'
 
 Vue.use(VueRouter)
 
@@ -74,6 +75,11 @@ const routes = [
         path:'/roomType',
         name:'roomType',
         component:RoomType
+      },
+      {
+        path:'/roomInformation',
+        name:'roomInformation',
+        component:RoomInformation
       }
     ]
   },

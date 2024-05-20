@@ -52,7 +52,7 @@
 
          <!-- 修改信息对话框 -->
          <el-dialog
-        title="修改客房信息"
+        title="修改客房类型信息"
         :visible.sync="modifyVisible"
         width="50%">
             <!-- 表单主题 -->
@@ -77,11 +77,11 @@
         </el-dialog>
 <!-- 添加对话框 -->
         <el-dialog
-        title="修改客房信息"
+        title="添加客房信息"
         :visible.sync="addVisible"
         width="50%">
             <!-- 表单主题 -->
-            <el-form :model="addInformation" ref="modifyInformationRef" label-width="70px">
+            <el-form :model="addInformation" ref="addInformationRef" label-width="70px">
 
                 <el-form-item label="客房ID">
                     <el-input v-model="addInformation.rtid"></el-input>
@@ -153,9 +153,6 @@ export default{
             this.roomTypeList = res.roomTypes
         },
         async modify(){
-
-            //后端还未写接口，不知道怎么获取
-            //console.log(`/roomtype/updateRoomType?operatorid=${this.$store.state.Sid}&RTid=${this.modifyInformation[0].rtid}&RTname=${this.modifyInformation[0].rtname}&RTprice=${this.modifyInformation[0].rtprice}`)
             const {data:res} = await axios.post(`/roomtype/updateRoomType?operatorid=${this.$store.state.Sid}&RTid=${this.modifyInformation[0].rtid}&RTname=${this.modifyInformation[0].rtname}&RTprice=${this.modifyInformation[0].rtprice}`)
             console.log("注册修改的结果为:",res)
             if(res.status == 200)

@@ -49,7 +49,7 @@
                   <!-- 文本 -->
                   <span>客房类型设置</span>
               </el-menu-item>
-              <el-menu-item index="/event/eventcontrol" @click="saveNavState('/event/eventcontrol')">
+              <el-menu-item index="/roomInformation" @click="saveNavState('/roomInformation')">
                   <!-- 图标 -->
                   <i class="el-icon-setting"></i>
                   <!-- 文本 -->
