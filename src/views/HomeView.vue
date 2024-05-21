@@ -98,6 +98,23 @@
                   <span>操作记录</span>
               </el-menu-item>
             </el-submenu>
+
+            <el-submenu index="5">
+              <!-- 一级菜单模板区 -->
+              <template slot="title">
+                <!-- 图标 -->
+                <i class="el-icon-menu"></i>
+                <!-- 文本 -->
+                <span>客户管理</span>
+              </template>
+              <!-- 二级菜单 -->
+              <el-menu-item index="/clientInformation" @click="saveNavState('/clientInformation')">
+                  <!-- 图标 -->
+                  <i class="el-icon-setting"></i>
+                  <!-- 文本 -->
+                  <span>客户信息设置</span>
+              </el-menu-item>
+            </el-submenu>
         </el-menu>
 
         </el-aside>
