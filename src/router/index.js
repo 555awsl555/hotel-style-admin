@@ -16,6 +16,7 @@ import OperatingRecord from '../views/Home/operating/OperatingRecord.vue'
 import RoomType from '../views/Home/room/RoomType.vue'
 import RoomInformation from '../views/Home/room/RoomInformation.vue'
 import ClientInformation from '../views/Home/client/ClientInformation.vue'
+import AddClient from '../views/Home/client/AddClient.vue'
 
 Vue.use(VueRouter)
 
@@ -86,6 +87,11 @@ const routes = [
         path:'/clientInformation',
         name:'clientInformation',
         component:ClientInformation
+      },
+      {
+        path:'/addClient',
+        name:'addClient',
+        component:AddClient
       },
     ]
   },

@@ -114,6 +114,12 @@
                   <!-- 文本 -->
                   <span>客户信息设置</span>
               </el-menu-item>
+              <el-menu-item index="/addClient" @click="saveNavState('/addClient')">
+                  <!-- 图标 -->
+                  <i class="el-icon-setting"></i>
+                  <!-- 文本 -->
+                  <span>客户信息添加</span>
+              </el-menu-item>
             </el-submenu>
         </el-menu>
 

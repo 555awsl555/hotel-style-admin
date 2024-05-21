@@ -79,6 +79,8 @@
                         :key="item.dgrade"
                         :label="item.dgrade"
                         :value="item.dgrade">
+                        <span style="float: left">{{ item.dgrade }}</span>
+                        <span style="float: right; color: #8492a6; font-size: 13px">折扣率：{{ item.dratio }}</span>
                         </el-option>
                     </el-select>
                 </el-form-item>
