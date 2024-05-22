@@ -22,6 +22,7 @@ import Reserve from '../views/Home/service/Reserve.vue'
 import ReserveInformation from '../views/Home/service/ReserveInformation.vue'
 import Order from '../views/Home/service/Order.vue'
 import OrderInformation from '../views/Home/service/OrderInformation.vue'
+import Payment from '../views/Home/service/Payment.vue'
 
 Vue.use(VueRouter)
 
@@ -117,6 +118,11 @@ const routes = [
         path:'/orderInformation',
         name:'orderInformation',
         component:OrderInformation
+      },
+      {
+        path:'/payment',
+        name:'payment',
+        component:Payment
       },
     ]
   },

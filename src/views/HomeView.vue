@@ -4,7 +4,7 @@
       <!--头部区域-->
       <el-header>
         <span></span>
-        <span>后台管理系统</span>
+        <span>酒店管理系统</span>
         <el-button type="info" @click="Logout()">退出</el-button>
       </el-header>
       <!--内容区域-->
@@ -52,6 +52,13 @@
                   <i class="el-icon-setting"></i>
                   <!-- 文本 -->
                   <span>入住订单信息查看</span>
+              </el-menu-item>
+
+              <el-menu-item index="/payment" @click="saveNavState('/payment')">
+                  <!-- 图标 -->
+                  <i class="el-icon-setting"></i>
+                  <!-- 文本 -->
+                  <span>结账收银</span>
               </el-menu-item>
             </el-submenu>
       
