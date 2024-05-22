@@ -23,14 +23,35 @@
                 <!-- 图标 -->
                 <i class="el-icon-menu"></i>
                 <!-- 文本 -->
-                <span>成果管理</span>
+                <span>入住管理</span>
               </template>
               <!-- 二级菜单 -->
-              <el-menu-item index="/source/control" @click="saveNavState('/source/control')">
+              <el-menu-item index="/reserve" @click="saveNavState('/reserve')">
                   <!-- 图标 -->
                   <i class="el-icon-setting"></i>
                   <!-- 文本 -->
-                  <span>下载链接上传</span>
+                  <span>客房预定</span>
+              </el-menu-item>
+
+              <el-menu-item index="/reserveInformation" @click="saveNavState('/reserveInformation')">
+                  <!-- 图标 -->
+                  <i class="el-icon-setting"></i>
+                  <!-- 文本 -->
+                  <span>客房预定信息</span>
+              </el-menu-item>
+              
+              <el-menu-item index="/order" @click="saveNavState('/order')">
+                  <!-- 图标 -->
+                  <i class="el-icon-setting"></i>
+                  <!-- 文本 -->
+                  <span>客房入住</span>
+              </el-menu-item>
+
+              <el-menu-item index="/orderInformation" @click="saveNavState('/orderInformation')">
+                  <!-- 图标 -->
+                  <i class="el-icon-setting"></i>
+                  <!-- 文本 -->
+                  <span>入住订单信息查看</span>
               </el-menu-item>
             </el-submenu>
       

@@ -18,6 +18,11 @@ import RoomInformation from '../views/Home/room/RoomInformation.vue'
 import ClientInformation from '../views/Home/client/ClientInformation.vue'
 import AddClient from '../views/Home/client/AddClient.vue'
 
+import Reserve from '../views/Home/service/Reserve.vue'
+import ReserveInformation from '../views/Home/service/ReserveInformation.vue'
+import Order from '../views/Home/service/Order.vue'
+import OrderInformation from '../views/Home/service/OrderInformation.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -92,6 +97,26 @@ const routes = [
         path:'/addClient',
         name:'addClient',
         component:AddClient
+      },
+      {
+        path:'/reserve',
+        name:'reserve',
+        component:Reserve
+      },
+      {
+        path:'/reserveInformation',
+        name:'reserveInformation',
+        component:ReserveInformation
+      },
+      {
+        path:'/order',
+        name:'order',
+        component:Order
+      },
+      {
+        path:'/orderInformation',
+        name:'orderInformation',
+        component:OrderInformation
       },
     ]
   },
