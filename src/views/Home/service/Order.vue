@@ -1,10 +1,3 @@
-<!-- 
-    先从选择器选择身份证号----点击搜索按钮-----查询该身份号(通过 cid)有无预定订单
-    若有 --- 从该预定订单获取房间类型 ---- 加载房间号选择器 ----选择房间号----入住
-
-
- -->
-
 <template>
     <div>
         <el-breadcrumb separator-class="el-icon-arrow-right">
@@ -218,7 +211,7 @@ export default{
             this.getReserveInformation()
             console.log("cid",cid)
         },
-        //获取预定信息列表/user/getreserve?sqlOption=where cid=${queryForm.cid}
+        //获取预定信息列表
         async getReserveInformation(){
             const {data:res} = await axios.get(`/user/getreserve?sqlOption=where cid=${this.queryForm.cid}`)
             console.log("getreserve的返回结果为：",res)
@@ -242,7 +235,7 @@ export default{
             console.log("getRIidList中获取的用户信息为",res)
             this.riidList = res.roomsinfo
         },
-        //预定操作/user/checkin_r?&operatorid=${this.$store.state.Sid}&CcardId=${this.queryForm.ccardId}&RIid=${this.queryForm.reserveRIid}
+        //预定操作
         async reserve(){
             //获取身份证号
             this.queryForm.ccardId = this.clientList.find(client => client.cid === this.queryForm.cid)?.ccardId;
@@ -272,7 +265,6 @@ export default{
             });
             console.log("roomlist",this.roomNoUsed)
         },
-        //提交入住信息/user/checkin_o?&operatorid=${this.$store.state.Sid}&Cid=${this.orderInformation.cid}&RIid=${this.orderInformation.riid}&OstartTime=${this.orderInformation.ostartTime}&OendTime=${this.orderInformation.oendTime}&Opcnt=${this.orderInformation.opcnt}&Opay=${this.orderInformation.opay}
         async addOrder(){
             console.log("orderInformation为：",this.orderInformation)
             console.log(`/user/checkin_o?&operatorid=${this.$store.state.Sid}&Cid=${this.queryForm.cid}&RIid=${this.orderInformation.riid}&OstartTime=${this.orderInformation.ostartTime}&OendTime=${this.orderInformation.oendTime}&Opcnt=${this.orderInformation.opcnt}&Opay=${this.orderInformation.opay}`)

@@ -28,11 +28,94 @@
             </el-form>
         </el-card>
 
-        <el-card v-if="showMoenyVisible" style="margin-top:20px">
+        <!-- <el-card v-if="showMoenyVisible" style="margin-top:20px">
             <span class="showmoney" style="display:block">原价： {{paymoney[0].ooriPrice}}</span>
             <span class="showmoney" style="display:block">折后价格：{{paymoney[0].oprice}}</span>
             <span class="showmoney" style="display:block">应付人民币：{{paymoney[0].oneedPay}}</span>
             <span></span>
+        </el-card> -->
+
+        <el-card v-if="showMoenyVisible" style="margin-top:20px">
+            <el-descriptions class="margin-top" title="账单" :column="3" :size="size" border>
+                <template slot="extra">
+                    <el-button type="primary" size="small">打印</el-button>
+                </template>
+                <el-descriptions-item :span="1">
+                <template slot="label">
+                    <i class="el-icon-user"></i>
+                    客户名
+                </template>
+                {{bill[0].cname}}
+                </el-descriptions-item>
+                <el-descriptions-item :span="1">
+                <template slot="label">
+                    <i class="el-icon-mobile-phone"></i>
+                    手机号
+                </template>
+                {{bill[0].cphone}}
+                </el-descriptions-item>
+                <el-descriptions-item :span="1">
+                <template slot="label">
+                    <i class="el-icon-postcard"></i>
+                    身份证号
+                </template>
+                {{bill[0].ccardId}}
+                </el-descriptions-item>
+                <el-descriptions-item :span="0.5">
+                <template slot="label">
+                    <i class="el-icon-tickets"></i>
+                    等级
+                </template>
+                <el-tag size="small">{{bill[0].dgrade}}</el-tag>
+                </el-descriptions-item>
+                <el-descriptions-item :span="2.5">
+                <template slot="label">
+                    <i class="el-icon-office-building"></i>
+                    联系地址
+                </template>
+                {{bill[0].caddr}}
+                </el-descriptions-item>
+
+                <el-descriptions-item :span="1.5">
+                <template slot="label">
+                    <i class="el-icon-time"></i>
+                    入住时间
+                </template>
+                {{bill[0].ostartTime}}
+                </el-descriptions-item>
+
+                <el-descriptions-item :span="1.5">
+                <template slot="label">
+                    <i class="el-icon-time"></i>
+                    结束时间
+                </template>
+                {{bill[0].oendTime}}
+                </el-descriptions-item>
+
+                <el-descriptions-item :span="1">
+                <template slot="label">
+                    <i class="el-icon-coin"></i>
+                    原价
+                </template>
+                {{paymoney[0].ooriPrice}}
+                </el-descriptions-item>
+
+                <el-descriptions-item :span="1">
+                <template slot="label">
+                    <i class="el-icon-coin"></i>
+                    折后价格
+                </template>
+                {{paymoney[0].oprice}}
+                </el-descriptions-item>
+
+                <el-descriptions-item :span="1">
+                <template slot="label">
+                    <i class="el-icon-coin"></i>
+                    应付人民币
+                </template>
+                {{paymoney[0].oneedPay}}
+                </el-descriptions-item>
+            </el-descriptions>
         </el-card>
     </div>
 </template>
@@ -79,7 +162,27 @@ export default{
                     "oneedPay": 189.6
                 }
             ],
-            showMoenyVisible:false
+            bill:[
+                {
+                    "riid": 10, //房间ID
+                    "cid": 2,   //顾客ID
+                    "oid": 6,   //订单ID
+                    "ostate": 0,    //订单状态
+                    "opay": 100.0,  //订单预支付
+                    "sid": 3,       //操作员
+                    "ostartTime": "2024-05-17 14:00:00.0",  //开始时间
+                    "otime": "2024-05-20 19:00:53.0",       //订单创建时间
+                    "oendTime": "2024-05-19 14:00:00.0",    //结束时间
+                    "opcnt": 2,    //入住人数
+                    "cname":'',
+                    "ccardId":'',
+                    "riname":'',
+                    "caddr":'',
+                    "dgrade":'',
+                }
+            ],
+            showMoenyVisible:false,
+            size: '',
         }
     },
     methods:{
@@ -108,6 +211,23 @@ export default{
         async pay(){
             console.log("payment",this.payment)
             console.log(`/user/Checkoutpayment?operatorid=${this.$store.state.Sid}&Cid=${this.payment.cid}`)
+
+            const {data:res2} = await axios.get(`/user/getAllorder?sqlOption=where Ostate=1&Cid=${this.payment.cid}`)
+            console.log("Bill返回结果为：",res2)
+            this.bill = res2.orders
+
+            this.bill.forEach(order => {
+                var clientName = this.clientList.find(cn => cn.cid === order.cid);
+                if (clientName){
+                    order.cname = clientName.cname;
+                    order.ccardId = clientName.ccardId;
+                    order.cphone = clientName.cphone;
+                    order.caddr = clientName.caddr;
+                    order.dgrade = clientName.dgrade;
+                }
+            });
+            console.log("bill赋值后为：",this.bill)
+
             const {data:res} = await axios.post(`/user/Checkoutpayment?operatorid=${this.$store.state.Sid}&Cid=${this.payment.cid}`)
             console.log("payment返回的结果为",res)
             if(res.status == 200){
