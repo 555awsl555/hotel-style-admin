@@ -40,6 +40,7 @@
                 <template slot="extra">
                     <el-button type="primary" size="small">打印</el-button>
                 </template>
+                <!-- -->
                 <el-descriptions-item :span="1">
                 <template slot="label">
                     <i class="el-icon-user"></i>
@@ -61,6 +62,7 @@
                 </template>
                 {{bill[0].ccardId}}
                 </el-descriptions-item>
+                <!--  -->
                 <el-descriptions-item :span="0.5">
                 <template slot="label">
                     <i class="el-icon-tickets"></i>
@@ -75,7 +77,39 @@
                 </template>
                 {{bill[0].caddr}}
                 </el-descriptions-item>
+                <!--  -->
+                <el-descriptions-item :span="1">
+                <template slot="label">
+                    <i class="el-icon-house"></i>
+                    房间号
+                </template>
+                {{bill[0].riname}}
+                </el-descriptions-item>
 
+                <el-descriptions-item :span="1"> 
+                <template slot="label">
+                    <i class="el-icon-collection-tag"></i>
+                    房间类型
+                </template>
+                {{bill[0].rtname}}
+                </el-descriptions-item>
+
+                <el-descriptions-item :span="1">
+                <template slot="label">
+                    <i class="el-icon-collection-tag"></i>
+                    房间楼层
+                </template>
+                {{bill[0].rifloor}}
+                </el-descriptions-item>
+
+                <el-descriptions-item :span="3">
+                <template slot="label">
+                    <i class="el-icon-phone-outline"></i>
+                    房间电话
+                </template>
+                {{bill[0].riphone}}
+                </el-descriptions-item>
+                <!--  -->
                 <el-descriptions-item :span="1.5">
                 <template slot="label">
                     <i class="el-icon-time"></i>
@@ -179,7 +213,25 @@ export default{
                     "riname":'',
                     "caddr":'',
                     "dgrade":'',
+                    "riname":'',
+                    "riphone":'',
+                    "rifloor":'',
+                    "rtname":'',
                 }
+            ],
+            roomInformationList:[
+                {
+                    "isUsed": 0,
+                    "riname": "101",
+                    "riid": 2,
+                    "rifloor": 1,
+                    "riphone": "77777",
+                    "rtid": 1
+                }
+            ],
+            //房间类型列表
+            roomTypeList:[
+
             ],
             showMoenyVisible:false,
             size: '',
@@ -226,6 +278,16 @@ export default{
                     order.dgrade = clientName.dgrade;
                 }
             });
+
+            this.bill.forEach(order => {
+                var roomName = this.roomInformationList.find(cn => cn.riid === order.riid);
+                if (roomName){
+                    order.riname = roomName.riname
+                    order.riphone = roomName.riphone
+                    order.rifloor = roomName.rifloor
+                    order.rtname = roomName.rtname
+                }
+            });
             console.log("bill赋值后为：",this.bill)
 
             const {data:res} = await axios.post(`/user/Checkoutpayment?operatorid=${this.$store.state.Sid}&Cid=${this.payment.cid}`)
@@ -243,11 +305,35 @@ export default{
                     type:'error'
                 });
             }
-        }
+        },
+         //1.获取客房类型的列表
+         async getAllRoomType(){
+            const {data:res} = await axios.get(`/roomtype/getAllroomType`)
+            console.log("getAllRoomType的返回结果为：",res)
+            this.roomTypeList = res.roomTypes
+            console.log("roomlist",this.roomTypeList)
+        },
+        //2.获取所有客房信息,并且映射数据
+        async getAllRoomInformation(){
+            const {data:res} = await axios.get(`/roominfo/getAllroominfo`)
+            console.log("getAllroominfo的返回结果为：",res)
+            this.roomInformationList = res.roomsinfo
+
+            this.roomInformationList.forEach(room => {
+                var roomType = this.roomTypeList.find(rt => rt.rtid === room.rtid);
+                if (roomType) {
+                    room.rtname = roomType.rtname;
+                    room.rtprice = roomType.rtprice;
+                }
+            });
+            console.log("映射的rinfoList为：",this.roomInformationList)
+        },
     },
     async created(){
         await this.getClient()
         await this.getAllorder()
+        await this.getAllRoomType()
+        await this.getAllRoomInformation()
     }
 }
 
