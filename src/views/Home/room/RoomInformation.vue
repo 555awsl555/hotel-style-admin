@@ -290,9 +290,9 @@ export default{
         }
 
     },
-    created(){
-        this.getAllRoomType();
-        this.getAllRoomInformation();
+    async created(){
+        await this.getAllRoomType();
+        await this.getAllRoomInformation();
     }
 }
 

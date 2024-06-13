@@ -179,6 +179,10 @@ export default{
                 {
                     jid:3,
                     jobName:"用户"
+                },
+                {
+                    jid:4,
+                    jobName:"清洁员"
                 }
             ],
             modifyVisible:false

@@ -15,6 +15,7 @@ import StaffApprove from '../views/Home/approve/StaffApprove.vue'
 import OperatingRecord from '../views/Home/operating/OperatingRecord.vue'
 import RoomType from '../views/Home/room/RoomType.vue'
 import RoomInformation from '../views/Home/room/RoomInformation.vue'
+import RoomClean from '../views/Home/room/RoomClean.vue'
 import ClientInformation from '../views/Home/client/ClientInformation.vue'
 import AddClient from '../views/Home/client/AddClient.vue'
 
@@ -88,6 +89,11 @@ const routes = [
         path:'/roomInformation',
         name:'roomInformation',
         component:RoomInformation
+      },
+      {
+        path:'/roomClean',
+        name:'roomClean',
+        component:RoomClean
       },
       {
         path:'/clientInformation',

@@ -17,7 +17,7 @@
           unique-opened :collapse="isCollapse" :collapse-transition="false" :router="true"
           :default-active="activePath">
 
-             <el-submenu index="1">
+             <el-submenu index="1" v-if="$store.state.jobName != '清洁员'">
               <!-- 一级菜单模板区 -->
               <template slot="title">
                 <!-- 图标 -->
@@ -62,7 +62,7 @@
               </el-menu-item>
             </el-submenu>
       
-            <el-submenu index="2" v-if="$store.state.jobName === '超级管理员' || $store.state.jobName === '管理员'">
+            <el-submenu index="2" v-if="$store.state.jobName === '超级管理员' || $store.state.jobName === '管理员' || $store.state.jobName === '清洁员'">
               <!-- 一级菜单模板区 -->
               <template slot="title">
                 <!-- 图标 -->
@@ -71,17 +71,24 @@
                 <span>客房管理</span>
               </template>
               <!-- 二级菜单 -->
-              <el-menu-item index="/roomType" @click="saveNavState('/roomType')">
+              <el-menu-item index="/roomType" @click="saveNavState('/roomType')" v-if="$store.state.jobName != '清洁员'">
                   <!-- 图标 -->
                   <i class="el-icon-setting"></i>
                   <!-- 文本 -->
                   <span>客房类型设置</span>
               </el-menu-item>
-              <el-menu-item index="/roomInformation" @click="saveNavState('/roomInformation')">
+              <el-menu-item index="/roomInformation" @click="saveNavState('/roomInformation')" v-if="$store.state.jobName != '清洁员'">
                   <!-- 图标 -->
                   <i class="el-icon-setting"></i>
                   <!-- 文本 -->
                   <span>客房信息设置</span>
+              </el-menu-item>
+              <el-menu-item index="/roomClean" @click="saveNavState('/roomClean')" v-if="$store.state.jobName === '清洁员'">
+              <!-- <el-menu-item index="/roomClean" @click="saveNavState('/roomClean')"> -->
+                  <!-- 图标 -->
+                  <i class="el-icon-setting"></i>
+                  <!-- 文本 -->
+                  <span>客房清理</span>
               </el-menu-item>
 
             </el-submenu>
@@ -127,7 +134,7 @@
               </el-menu-item>
             </el-submenu>
 
-            <el-submenu index="5">
+            <el-submenu index="5" v-if="$store.state.jobName != '清洁员'">
               <!-- 一级菜单模板区 -->
               <template slot="title">
                 <!-- 图标 -->
