@@ -252,7 +252,7 @@ export default{
         },
         //获取所有没有被使用过的房间
         async getRoomNoUsed(){
-            const {data:res} = await axios.get(`/roominfo/getAllroominfo?sqloptions=where isUsed=0`)
+            const {data:res} = await axios.get(`/roominfo/getAllroominfo?sqlOptions=where isUsed=0`)
             console.log("getRoomNoUsed的返回结果为：",res)
             this.roomNoUsed = res.roomsinfo
 

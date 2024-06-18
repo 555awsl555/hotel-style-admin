@@ -73,6 +73,16 @@
                     </template>
                 </el-table-column>
 
+                <el-table-column label="换房操作" width="100">
+                    <template slot-scope="scope">
+                        <el-button
+                        size="mini"
+                        type="primary"
+                        v-if="scope.row.ostate == 1"
+                        @click="changeRoom(scope.row.oid)">换 房</el-button>
+                    </template>
+                </el-table-column>
+
                 <el-table-column label="操作员ID" width="100">
                     <template slot-scope="scope">
                         <span style="">{{ scope.row.sid }}</span>
@@ -135,7 +145,7 @@ export default{
                     "ooriPrice": 181.0,
                     "oneedPay": 131.0
                 }
-            ]
+            ],
         }
     },
     methods:{
@@ -182,6 +192,9 @@ export default{
             const {data:res} = await axios.get(`/order/orderprice`)
             this.alreadyPayList = res.orderprices
             console.log("已经支付的订单钱列表:",this.alreadyPayList)
+        },
+        changeRoom(oid){
+            console.log(oid)
         }
 
     },
