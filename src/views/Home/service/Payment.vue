@@ -37,9 +37,6 @@
 
         <el-card v-if="showMoenyVisible" style="margin-top:20px">
             <el-descriptions class="margin-top" title="账单" :column="3" :size="size" border>
-                <template slot="extra">
-                    <el-button type="primary" size="small">打印</el-button>
-                </template>
                 <!-- -->
                 <el-descriptions-item :span="1">
                 <template slot="label">

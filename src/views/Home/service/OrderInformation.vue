@@ -12,13 +12,15 @@
                 <el-table-column label="订单编号" width="100">
                     <template slot-scope="scope">
                         <i class="el-icon-s-help"></i>
-                        <span style="margin-left: 10px">{{ scope.row.cid }}</span>
+                        <span style="margin-left: 10px">{{ scope.row.oid }}</span>
                     </template>
                 </el-table-column>
 
                 <el-table-column label="订单状态" width="100">
                     <template slot-scope="scope">
-                        <span style="">{{ scope.row.ostate?"进行中":"已结束" }}</span>
+                        <el-tag v-if="scope.row.ostate == 1" type="success"> 进行中 </el-tag>
+                        <el-tag v-else-if="scope.row.ostate == 2" type="warning"> 未清洁 </el-tag>
+                        <el-tag v-else type="info"> 已结束 </el-tag>
                     </template>
                 </el-table-column>
 
@@ -46,9 +48,10 @@
                     </template>
                 </el-table-column>
 
-                <el-table-column label="订单预支付" width="100">
+                <el-table-column label="订单已支付" width="100">
                     <template slot-scope="scope">
-                        <span style="">{{ scope.row.opay }}元</span>
+                        <span v-if="scope.row.ostate == 1" style="">{{ scope.row.opay }}元</span>
+                        <span v-else style="">{{ scope.row.ooriPrice }}元</span>
                     </template>
                 </el-table-column>
 
@@ -100,7 +103,8 @@ export default{
                     "opcnt": 2,    //入住人数
                     "cname":'',
                     "ccardId":'',
-                    "riname":''
+                    "riname":'',
+                    "orriPrice":''
                 }
             ],
             roomInformationList:[
@@ -123,6 +127,15 @@ export default{
                     "caddr": "杭电618"
                 }
             ],
+            //存放订单已经支付完成的列表
+            alreadyPayList:[
+                {
+                    "oid": 30,
+                    "oprice": 181.0,
+                    "ooriPrice": 181.0,
+                    "oneedPay": 131.0
+                }
+            ]
         }
     },
     methods:{
@@ -131,12 +144,16 @@ export default{
             this.orderList.forEach(order => {
                 var roomName = this.roomInformationList.find(rt => rt.riid === order.riid);
                 var clientName = this.clientList.find(cn => cn.cid === order.cid);
+                var alreadypay = this.alreadyPayList.find(ap => ap.oid === order.oid)
                 if (roomName) {
                     order.riname = roomName.riname;
                 }
                 if (clientName){
                     order.cname = clientName.cname;
                     order.ccardId = clientName.ccardId;
+                }
+                if (alreadypay){
+                    order.ooriPrice = alreadypay.ooriPrice;
                 }
             });
             console.log("映射的List为：",this.orderList)
@@ -160,13 +177,19 @@ export default{
             this.orderList = res.orders
             console.log("orderList:",this.orderList)
             await this.improveOrderList()
+        },
+        async getAlreadyPay(){
+            const {data:res} = await axios.get(`/order/orderprice`)
+            this.alreadyPayList = res.orderprices
+            console.log("已经支付的订单钱列表:",this.alreadyPayList)
         }
 
     },
     async created(){
         await this.getClient();
         await this.getAllRoomInformation();
-        await this.getAllorder()
+        await this.getAlreadyPay();
+        await this.getAllorder();
     }
 }
 

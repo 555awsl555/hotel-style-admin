@@ -44,7 +44,10 @@
 
                 <el-table-column label="是否使用" width="150">
                     <template slot-scope="scope">
-                        <span style="">{{ scope.row.isUsed?"使用中":"空闲中" }}</span>
+                        <!-- <span style="">{{ scope.row.isUsed?"使用中":"空闲中" }}</span> -->
+                        <el-tag v-if="scope.row.isUsed == 1" type="success"> 使用中 </el-tag>
+                        <el-tag v-else-if="scope.row.isUsed == 2" type="warning"> 未清洁 </el-tag>
+                        <el-tag v-else type="info"> 空闲中 </el-tag>
                     </template>
                 </el-table-column>
 
@@ -165,12 +168,12 @@ export default{
              */
             roomInformationList:[
                 {
-                    "isUsed": 0,
-                    "riname": "101",
-                    "riid": 2,
-                    "rifloor": 1,
-                    "riphone": "77777",
-                    "rtid": 1
+                    "isUsed": "",
+                    "riname": "",
+                    "riid": "",
+                    "rifloor": "",
+                    "riphone": "",
+                    "rtid": ""
                 }
             ],
             //房间类型列表
