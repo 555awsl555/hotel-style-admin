@@ -6,8 +6,8 @@ import axios from 'axios'
 Vue.prototype.$http = axios
 // axios.defaults.baseURL = 'http://192.168.10.223:8012'
 // axios.defaults.baseURL = 'http://192.168.10.57:8012'
-axios.defaults.baseURL = 'http://124.222.95.53:8012/'
-// axios.defaults.baseURL = 'http://localhost:8012'
+// axios.defaults.baseURL = 'http://124.222.95.53:8012/'
+axios.defaults.baseURL = 'http://localhost:8012'
 
 
 //富文本编辑器挂载

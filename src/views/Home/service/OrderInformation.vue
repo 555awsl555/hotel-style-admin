@@ -79,7 +79,7 @@
                         size="mini"
                         type="primary"
                         v-if="scope.row.ostate == 1"
-                        @click="changeRoom(scope.row.oid)">换 房</el-button>
+                        @click="changeRoom(scope.row.oid,scope.row.rtid)">换 房</el-button>
                     </template>
                 </el-table-column>
 
@@ -91,6 +91,30 @@
 
             </el-table>
         </el-card>
+
+        <el-dialog
+        title="换 房 操 作"
+        :visible.sync="modifyVisible"
+        width="50%">
+            <el-form :model="changeInformation" ref="changeRoomIdRef" label-width="70px">
+                <el-form-item label="房间号">
+                    <el-select v-model="changeInformation.changeRoomId" filterable placeholder="请选择房间号">
+                        <el-option
+                        v-for="item in roomList"
+                        :key="item.riid"
+                        :label="item.riname"
+                        :value="item.riid">
+                        <span style="float: left">{{ item.riname }}</span>
+                        <!-- <span style="float: right; color: #8492a6; font-size: 13px">{{ item.rtname }}</span> -->
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="modifyVisible = false">取 消</el-button>
+                <el-button type="primary" @click="modify()">修 改</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 
@@ -99,6 +123,13 @@ import axios from 'axios'
 export default{
     data(){
         return{
+            modifyVisible:false,
+            changeInformation:{
+                changeRoomId:1,
+                changeRoomOid:"",
+            },
+            // changeRoomId:1,
+            // changeRoomOid:"",
             orderList:[
                 {
                     "riid": 10, //房间ID
@@ -146,6 +177,16 @@ export default{
                     "oneedPay": 131.0
                 }
             ],
+            roomList:[
+                {
+                    "isUsed": 0,
+                    "riname": "101",
+                    "riid": 2,
+                    "rtid": 2,
+                    "rifloor": 1,
+                    "riphone": "78787878"
+                }
+            ]
         }
     },
     methods:{
@@ -157,6 +198,7 @@ export default{
                 var alreadypay = this.alreadyPayList.find(ap => ap.oid === order.oid)
                 if (roomName) {
                     order.riname = roomName.riname;
+                    order.rtid = roomName.rtid;
                 }
                 if (clientName){
                     order.cname = clientName.cname;
@@ -193,9 +235,32 @@ export default{
             this.alreadyPayList = res.orderprices
             console.log("已经支付的订单钱列表:",this.alreadyPayList)
         },
-        changeRoom(oid){
+        async getRoomList(rtid){
+            console.log("rtid",rtid)
+            const {data:res} = await axios.get(`/roominfo/getAllroominfo?sqlOptions=where isUsed = 0 and RTid = ${rtid}`)
+            console.log("getRoomList的返回结果为：",res)
+            this.roomList = res.roomsinfo
+        },
+        async changeRoom(oid,rtid){
+            // /roominfo/getAllroominfo?sqlOptions= where isUsed = 0 and RTid = 2
+            //TODO 
+            this.changeInformation.changeRoomOid = oid
+            console.log("changeRoomOid",this.changeInformation.changeRoomOid)
+            await this.getRoomList(rtid);
+            this.modifyVisible = true;
             console.log(oid)
+        },
+        async modify(){
+            console.log(this.changeInformation.changeRoomOid,this.changeInformation.changeRoomId)
+            // /user/getRoom
+            const {data:res} = await axios.post(`/user/changeRoom?operatorid=${this.$store.state.Sid}&Oid=${this.changeInformation.changeRoomOid}&newRIid=${this.changeInformation.changeRoomId}`)
+            console.log("modify返回结果：",res)
+            this.modifyVisible = false
+            await this.getAllRoomInformation();
+            await this.getAlreadyPay();
+            await this.getAllorder();
         }
+        
 
     },
     async created(){
