@@ -261,7 +261,7 @@ export default{
             console.log("payment",this.payment)
             console.log(`/user/Checkoutpayment?operatorid=${this.$store.state.Sid}&Cid=${this.payment.cid}`)
 
-            const {data:res2} = await axios.get(`/user/getAllorder?sqlOption=where Ostate=1&Cid=${this.payment.cid}`)
+            const {data:res2} = await axios.get(`/user/getAllorder?sqlOption=where Ostate=1 and Cid=${this.payment.cid}`)
             console.log("Bill返回结果为：",res2)
             this.bill = res2.orders
 
