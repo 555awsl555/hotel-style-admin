@@ -17,6 +17,24 @@
                         <span style="">{{ scope.row.rid }}</span>
                     </template>
                 </el-table-column>
+
+                <el-table-column label="客户姓名" width="150">
+                    <template slot-scope="scope">
+                        <span style="">{{ scope.row.cname }}</span>
+                    </template>
+                </el-table-column>
+
+                <el-table-column label="客户身份证" width="200">
+                    <template slot-scope="scope">
+                        <span style="">{{ scope.row.ccardId }}</span>
+                    </template>
+                </el-table-column>
+
+                <el-table-column label="预定房间类型" width="150">
+                    <template slot-scope="scope">
+                        <span style="">{{ scope.row.rtname }}</span>
+                    </template>
+                </el-table-column>
                 
                 <el-table-column label="预定时间" width="200">
                     <template slot-scope="scope">
@@ -48,7 +66,7 @@
                     </template>
                 </el-table-column>
 
-                <el-table-column label="房间类型ID" width="150">
+                <!-- <el-table-column label="房间类型ID" width="150">
                     <template slot-scope="scope">
                         <span style="">{{ scope.row.rtid }}</span>
                     </template>
@@ -58,7 +76,7 @@
                     <template slot-scope="scope">
                         <span style="">{{ scope.row.cid }}</span>
                     </template>
-                </el-table-column>
+                </el-table-column> -->
 
                 <el-table-column label="操作员ID" width="150">
                     <template slot-scope="scope">
@@ -88,20 +106,68 @@ export default{
                     "cid": 2,   //顾客ID
                     "sid": 3    //操作员ID
                 }
-            ]
+            ],
+            clientList:[
+                {
+                    "cname": "王家晨",
+                    "dgrade": 1,
+                    "ccardId": "331003200410160000",
+                    "cid": 2,
+                    "cphone": "18868436522",
+                    "caddr": "杭电618"
+                }
+            ],
+            roomTypeList:[
+
+            ],
         }
     },
     methods:{
+        async improveReserveList(){
+            this.reserveList.forEach(reserve => {
+                var roomName = this.roomTypeList.find(rt => rt.rtid === reserve.rtid);
+                var clientName = this.clientList.find(cn => cn.cid === reserve.cid);
+                if (roomName) {
+                    reserve.rtname = roomName.rtname;
+                }
+                if (clientName){
+                    reserve.cname = clientName.cname;
+                    reserve.ccardId = clientName.ccardId;
+                }
+            });
+            console.log("映射的List为：",this.reserveList)
+        },
         //1.获取所有预定信息/user/getreserve
         async getReserve(){
             const {data:res} = await axios.get(`/user/getreserve`)
             console.log("getreserve的返回结果为：",res)
             this.reserveList = res.reserves
             console.log("reservelist",this.reserveList)
-        }
+            await this.improveReserveList()
+        },
+        //2.获取客户信息
+        async getClient(){
+            const {data:res} = await axios.get(`/discount/getClient`)
+            this.clientList = res.clients
+            console.log("clientList:",this.clientList)
+        },
+        //3.获取房间信息
+        // async getAllRoomInformation(){
+        //     const {data:res} = await axios.get(`/roominfo/getAllroominfo`)
+        //     console.log("getAllroominfo的返回结果为：",res)
+        //     this.roomInformationList = res.roomsinfo
+        // },
+        async getAllRoomType(){
+            const {data:res} = await axios.get(`/roomtype/getAllroomType`)
+            console.log("getAllRoomType的返回结果为：",res)
+            this.roomTypeList = res.roomTypes
+            console.log("roomlist",this.roomTypeList)
+        },
     },
-    created(){
-        this.getReserve()
+    async created(){
+        await this.getClient()
+        await this.getAllRoomType()
+        await this.getReserve()
     }
 }
 
